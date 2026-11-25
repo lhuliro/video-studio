@@ -1,0 +1,1 @@
+# Names and products Whisper should spell right, one per line.
