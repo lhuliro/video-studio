@@ -75,8 +75,9 @@ screen while I talk about it. Times come from `transcript.json`, never guessed.
   animations and the `<Audio>` elements read them, so they can't drift apart.
 - `edit/sfx.json` is an earshot spec: `{"format": "wav", "sounds": [{"name": "pop1", "want": "a small soft pop",
   "seed": 1}]}` (fields in `tools/earshot/docs/MAKE.md`). Give each sound a `seed` so a fresh session renders the
-  same take. After `npm run sfx`, `audio/sfx/manifest.json` gives each file's `peak_s`: a hit lands on frame f by
-  starting the file at `f - peak_s * fps`. A whoosh peaks on the fastest frame of the move.
+  same take. `npm run sfx` also writes `edit/sfx-peaks.json` (kept in git): each sound's loudest moment in seconds.
+  Play sounds with `<Sfx>` from `src/style/Sfx.tsx`, which lands that peak on the cue frame. A whoosh peaks on the
+  fastest frame of the move.
 - Keep effects small and under the voice. Check levels against the voice after every change (ffmpeg `ebur128` on
   the render; effects should sit well below the voice).
 
@@ -85,6 +86,9 @@ Keep what matters out of: the top 14%, the bottom 35%, 6% each side, and the but
 40% tall). The profile grid shows the cover's middle 1080×1440.
 
 ## Style
+Components in `src/style/`: `Captions` (every word, a phrase at a time), `PunchIn`, `PopCard`, `Sfx`; values in
+`tokens.ts`; fonts in `fonts.ts`. After any change to the style, render `style-preview` (3 s) and look at it.
+My style is still evolving: when a video's topic seems to want a different feel, ask me before changing it.
 A video only **composes** components from `src/style/`. It never sets its own colours, fonts, sizes or easing: those
 live in `src/style/tokens.ts`, so a change to the style lands on every video. Avoid the stock Remotion look unless I
 ask: word-by-word pop captions with a coloured active word, the default bouncy spring, and Montserrat, Poppins, Bebas or

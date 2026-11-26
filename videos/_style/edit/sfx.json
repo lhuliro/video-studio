@@ -1,0 +1,5 @@
+{"format": "wav",
+ "sounds": [
+  {"name": "card", "want": "a soft muted paper tap", "seed": 1},
+  {"name": "zoom", "want": "a very soft short airy whoosh", "seed": 1}
+ ]}
